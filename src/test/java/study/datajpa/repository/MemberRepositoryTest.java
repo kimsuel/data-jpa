@@ -150,4 +150,27 @@ public class MemberRepositoryTest {
             System.out.println("member = " + member);
         }
     }
+
+    @Test
+    public void returnType() {
+        Member m1 = new Member("AAA", 10);
+        Member m2 = new Member("BBB", 20);
+//        Member m2 = new Member("AAA", 20);
+        // 중복값 있을 때 Optional 로 하면 예외 터뜨려줌
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+//        List<Member> result = memberRepository.findListByUsername("AAA");
+        List<Member> result = memberRepository.findListByUsername("adada");
+        System.out.println("result = " + result.size());
+
+//        Member findMember = memberRepository.findMemberByUsername("AAA");
+        Member findMember = memberRepository.findMemberByUsername("adadad");
+        System.out.println("findMember = " + findMember);  // null
+
+        Optional<Member> OptionalMember = memberRepository.findOptionalByUsername("AAA");
+        System.out.println("OptionalMember = " + OptionalMember);
+
+        // dB 에 있을수도 없을수도 있을 땐 Optional
+    }
 }
